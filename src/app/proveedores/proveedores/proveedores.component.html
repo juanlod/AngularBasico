@@ -1,0 +1,84 @@
+<h3>Listado de Proveedores</h3>
+<hr>
+<a class="btn btn-primary float-md-right" routerLink="/addprove">Añadir nuevo proveedor</a>
+<div class="form-inline float-left">
+  <div class="form-group col-md-4 ">
+    <input type="search" class="form-control" placeholder="Nombre" [formControl]="campoBusqueda">
+  </div>
+  <div class="form-group col-md-4">
+    <input type="search" class="form-control" placeholder="Correo" [formControl]="campoCorreo">
+  </div>
+  <div class="form-group col-md-4">
+    <input type="text" class="form-control" placeholder="Telefono" [formControl]="campoTelefono" >
+  </div>
+</div>
+<div class="form-inline" style="margin-top: 80px">
+ <label for="numero">Mostrando</label>
+  <select type="search" id="numero" class="form-control" [(ngModel)]="numero" style="margin-left: 1%">
+    <option *ngFor="let numero of numeros" [ngValue]="numero">
+      {{ numero }}
+    </option>
+  </select>
+  <label for="numero" style="margin-left: 1%">entradas</label>
+</div>
+<div *ngIf="cargando" class="text-center" style="padding-top: 60px;">
+  <img src="../../../assets/spinner.gif" alt="cargando">
+</div>
+<div *ngIf="resultados; else: mostrar">
+  <table class="table table-bordered table-striped" style="margin-top: 40px;" matSort (matSortChange)="sortData($event)">
+    <thead>
+      <tr>
+        <th mat-sort-header="nombre">Nombre</th>
+        <th mat-sort-header="email">Correo electrónico</th>
+        <th mat-sort-header="telefono">Teléfono</th>
+        <th mat-sort-header="direccion">Direccion</th>
+        <th mat-sort-header="contacto">Contacto</th>
+        <th>Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proveedor of sortedData | paginate: {itemsPerPage: numero, currentPage: pageActual}">
+        <td>{{ proveedor.nombre }}</td>
+        <td><a href="mailto:{{ proveedor.email }}">{{ proveedor.email }}</a></td>
+        <td>{{ proveedor.telefono }}</td>
+        <td>{{ proveedor.direccion }}</td>
+        <td>{{ proveedor.contacto }}</td>
+        <td>
+          <button type="button" class="btn btn-success" routerLink="/editprove/{{ proveedor.id$ }}">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageActual = $event" (change)="numero = $event"></pagination-controls>
+</div>
+<br>
+<div class="form-inline float-left" *ngIf="noresultados">
+  <p>No existe ninguna coincidencia</p>
+</div>
+<ng-template #mostrar>
+  <table class="table table-bordered table-striped" style="margin-top: 40px;" matSort (matSortChange)="sortData($event)">
+    <thead>
+      <tr>
+        <th mat-sort-header="nombre" id="nombre" >Nombre</th>
+        <th mat-sort-header="email">Correo electrónico</th>
+        <th mat-sort-header="telefono">Teléfono</th>
+        <th mat-sort-header="direccion">Direccion</th>
+        <th mat-sort-header="contacto">Contacto</th>
+        <th>Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proveedor of sortedData | paginate: {itemsPerPage: numero, currentPage: pageActual}">
+        <td>{{ proveedor.nombre }}</td>
+        <td><a href="mailto:{{ proveedor.email}}">{{ proveedor.email }}</a></td>
+        <td>{{ proveedor.telefono }}</td>
+        <td>{{ proveedor.direccion }}</td>
+        <td>{{ proveedor.contacto }}</td>
+        <td>
+          <button type="button" class="btn btn-success" routerLink="/editprove/{{ proveedor.id$ }}">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageActual = $event" (change)="numero = $event"></pagination-controls>
+</ng-template>

@@ -1,0 +1,88 @@
+<h3>Listado de facturas</h3>
+<hr>
+<a class="btn btn-primary float-md-right" routerLink="/addfra">Añadir nueva factura</a>
+<div class="form-inline float-md-left">
+  <div class="form-group col-md-6 ">
+    <input type="search" class="form-control" placeholder="Proveedor" [formControl]="campoBusqueda">
+  </div>
+  <div class="form-group col-md-4">
+    <input type="search" class="form-control" placeholder="Fecha" [formControl]="campoFecha">
+  </div>
+</div>
+<div class="form-inline" style="margin-top: 80px">
+    <label for="numero">Mostrando</label>
+     <select type="search" id="numero" class="form-control" [(ngModel)]="numero" style="margin-left: 1%">
+       <option *ngFor="let numero of numeros" [ngValue]="numero">
+         {{ numero }}
+       </option>
+     </select>
+     <label for="numero" style="margin-left: 1%">entradas</label>
+   </div>
+<div *ngIf="cargando" class="text-center" style="padding-top: 60px;">
+  <img src="../../../assets/spinner.gif" alt="cargando">
+</div>
+<div *ngIf="resultados; else: mostrar">
+  <table class="table table-bordered table-striped" style="margin-top:40px"  matSort (matSortChange)="sortData($event)">
+    <thead>
+      <th mat-sort-header="proveedor">Proveedor</th>
+      <th mat-sort-header="fecha">Fecha</th>
+      <th mat-sort-header="concepto" style="size: 100px">Concepto</th>
+      <th mat-sort-header="base">Importe sin IVA</th>
+      <th mat-sort-header="iva">IVA</th>
+      <th mat-sort-header="total">Total</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let factura of sortedData | paginate: {itemsPerPage: numero, currentPage: pageActual}">
+        <td>{{factura.proveedor}}</td>
+        <td>{{factura.fecha}}</td>
+        <td style="size: 100px">{{factura.concepto}}</td>
+        <td>{{factura.base}}</td>
+        <td>{{factura.iva}}</td>
+        <td>{{factura.total}}</td>
+        <td>
+          <button type="button" class="btn btn-success" routerLink="/editfra/{{ factura.id$ }}">Editar</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="eliminarFactura(factura.id$)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+</div>
+<div class="form-inline float-left" *ngIf="noresultados">
+  <p>No existe ninguna coincidencia</p>
+</div>
+<ng-template #mostrar>
+  <table class="table table-bordered table-striped" style="margin-top:40px" matSort (matSortChange)="sortData($event)">
+    <thead>
+      <th mat-sort-header="proveedor">Proveedor</th>
+      <th mat-sort-header="fecha">Fecha</th>
+      <th mat-sort-header="concepto" style="size: 50px">Concepto</th>
+      <th mat-sort-header="base">Importe sin IVA</th>
+      <th mat-sort-header="iva">IVA</th>
+      <th mat-sort-header="total">Total</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let factura of sortedData | paginate: {itemsPerPage: numero, currentPage: pageActual}">
+        <td>{{factura.proveedor}}</td>
+        <td>{{factura.fecha}}</td>
+        <td style="size: 50px">{{factura.concepto}}</td>
+        <td>{{factura.base}}</td>
+        <td>{{factura.iva}}</td>
+        <td>{{factura.total}}</td>
+        <td>
+          <button type="button" class="btn btn-success" routerLink="/editfra/{{ factura.id$ }}">Editar</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="eliminarFactura(factura.id$)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+</ng-template>

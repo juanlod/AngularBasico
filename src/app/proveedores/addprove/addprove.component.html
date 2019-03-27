@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col col-md"></div>
+    <div class="col-10 col-md-8">
+        <h2>Añadir nuevo proveedor</h2>
+        <hr>
+        <a class="btn btn-primary float-md-right" routerLink="/proveedores">
+      Regresar al listado
+    </a>
+        <br>
+        <form (ngSubmit)="onSubmit()" [formGroup]="proveedorForm">
+            <div class="form-group">
+                <strong><label for="nombre">Nombre</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="proveedorForm.get('nombre').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="proveedorForm.get('nombre').invalid && proveedorForm.get('nombre').touched"></i>
+                <input type="text" class="form-control" id="nombre" formControlName="nombre">
+                <div class="error-message" *ngIf=" (proveedorForm.get('nombre').invalid && proveedorForm.get('nombre').touched)">
+                    El nombre no puede estar vacío</div>
+            </div>
+            <div class="form-group">
+                <strong><label for="cif">C.I.F.</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="proveedorForm.get('cif').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="proveedorForm.get('cif').invalid && proveedorForm.get('cif').touched"></i>
+                <input type="text" class="form-control" id="cif" formControlName="cif">
+                <div class="error-message" *ngIf=" (proveedorForm.get('cif').invalid && proveedorForm.get('cif').touched)">El número CIF no puede estar vacío</div>
+            </div>
+            <div class="form-group">
+                <strong><label for="direccion">Dirección</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="proveedorForm.get('direccion').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="proveedorForm.get('direccion').invalid && proveedorForm.get('direccion').touched"></i>
+                <input type="text" class="form-control" id="direccion" formControlName="direccion">
+                <div class="error-message" *ngIf=" (proveedorForm.get('direccion').invalid && proveedorForm.get('direccion').touched)">La dirección no puede estar vacía</div>
+            </div>
+            <div class="form-group">
+                <strong><label for="cp">Código Postal</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="proveedorForm.get('cp').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="proveedorForm.get('cp').invalid && proveedorForm.get('cp').touched"></i>
+                <input type="text" class="form-control" id="cp" formControlName="cp">
+                <div class="error-message" *ngIf=" (proveedorForm.get('cp').invalid && proveedorForm.get('cp').touched)">El código postal no puede estar vacío</div>
+            </div>
+            <div class="form-group">
+                <strong><label for="localidad">Localidad</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="proveedorForm.get('localidad').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="proveedorForm.get('localidad').invalid && proveedorForm.get('localidad').touched"></i>
+                <input type="text" class="form-control" id="localidad" formControlName="localidad">
+                <div class="error-message" *ngIf=" (proveedorForm.get('localidad').invalid && proveedorForm.get('localidad').touched)">La localidad no puede estar vacía</div>
+            </div>
+            <div class="form-group">
+                <strong><label for="provincia">Provincia</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="proveedorForm.get('provincia').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="proveedorForm.get('provincia').invalid && proveedorForm.get('provincia').touched"></i>
+                <select class="form-control" id="provincia" formControlName="provincia">
+          <option value="">Seleccione la provincia</option>
+          <option *ngFor="let provincia of provincias" [value]="provincia">
+            {{ provincia }}
+          </option>
+        </select>
+                <div class="error-message" *ngIf=" (proveedorForm.get('provincia').invalid && proveedorForm.get('provincia').touched)">Por favor, seleccione una provincia</div>
+            </div>
+            <div class="form-group">
+                <strong><label for="telefono">Teléfono</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="proveedorForm.get('telefono').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="proveedorForm.get('telefono').invalid && proveedorForm.get('telefono').touched"></i>
+                <input type="text" class="form-control" id="telefono" formControlName="telefono">
+                <div class="error-message" *ngIf=" (proveedorForm.get('telefono').invalid && proveedorForm.get('telefono').touched)">El teléfono no puede estar vacío</div>
+            </div>
+            <div class="form-group">
+                <strong><label for="email">Correo Electrónico</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="proveedorForm.get('email').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="proveedorForm.get('email').invalid && proveedorForm.get('email').touched"></i>
+                <input type="email" class="form-control" id="email" formControlName="email">
+                <div class="error-message" *ngIf=" (proveedorForm.get('email').invalid && proveedorForm.get('email').touched)">
+                    El email no puede estar vacío</div>
+            </div>
+            <div class="form-group">
+                <strong><label for="contacto">Persona de Contacto</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="proveedorForm.get('contacto').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="proveedorForm.get('contacto').invalid && proveedorForm.get('contacto').touched"></i>
+                <input type="text" class="form-control" id="contacto" formControlName="contacto">
+                <div class="error-message" *ngIf=" (proveedorForm.get('contacto').invalid && proveedorForm.get('contacto').touched)">
+                    Introduzca una persona de contacto
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" [disabled]="!proveedorForm.valid">
+          Añadir Proveedor
+        </button>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-danger" routerLink="/proveedores">Cancel</button>
+            </div>
+        </form>
+        <hr>
+    </div>
+    <div class="col col-md"></div>
+</div>

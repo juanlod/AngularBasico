@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col col-md"></div>
+    <div class="col-10 col-md-8">
+        <h2>Editar Factura</h2>
+        <hr>
+        <a class="btn btn-primary float-md-right" routerLink="/facturas">
+        Regresar al listado
+      </a>
+        <br>
+        <form [formGroup]="facturaForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="proveedor">Proveedor</label>
+                <i class="fa fa-check-circle check" *ngIf="facturaForm.get('proveedor').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="facturaForm.get('proveedor').invalid && facturaForm.get('proveedor').touched"></i>
+                <input type="text" class="form-control" readonly id="proveedor" formControlName="proveedor" [(ngModel)]='factura.proveedor'>
+            </div>
+
+            <div class="form-group">
+                <strong><label for="fecha">Fecha</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="facturaForm.get('fecha').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="facturaForm.get('fecha').invalid && facturaForm.get('fecha').touched"></i>
+                <input type="date" class="form-control" id="fecha" formControlName="fecha" [(ngModel)]='factura.fecha'>
+            </div>
+            <div class="error-message" *ngIf=" (facturaForm.get('fecha').invalid && facturaForm.get('fecha').touched)">
+                Por favor introduzca una fecha del año actual
+            </div>
+
+            <div class="form-group">
+                <strong><label for="concepto">Concepto</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="facturaForm.get('concepto').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="facturaForm.get('concepto').invalid && facturaForm.get('concepto').touched"></i>
+                <input type="text" class="form-control" id="concepto" formControlName="concepto" [(ngModel)]='factura.concepto'>
+            </div>
+            <div class="error-message" *ngIf=" (facturaForm.get('concepto').invalid && facturaForm.get('concepto').touched)">
+                El concepto no puede estar vacío
+            </div>
+
+            <div class="form-group">
+                <strong><label for="base">Base Imponible</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="facturaForm.get('base').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="facturaForm.get('base').invalid && facturaForm.get('base').touched"></i>
+                <input type="number" class="form-control" id="base" formControlName="base" [(ngModel)]='factura.base'>
+            </div>
+            <div class="error-message" *ngIf=" (facturaForm.get('base').invalid && facturaForm.get('base').touched)">
+                La cantidad no puede estar vacía
+            </div>
+
+            <div class="form-group">
+                <strong><label for="tipo">Tipo de IVA</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="facturaForm.get('tipo').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="facturaForm.get('tipo').invalid && facturaForm.get('tipo').touched"></i>
+                <select class="form-control" id=tipo formControlName="tipo" [(ngModel)]='factura.tipo'>
+          <option value="">Seleccione...</option>
+          <option value=0>0 %</option>
+          <option value=0.04>4 %</option>
+          <option value=0.10>10 %</option>
+          <option value=0.21>21 %</option>
+        </select>
+            </div>
+            <div class="error-message" *ngIf=" (facturaForm.get('tipo').invalid && facturaForm.get('tipo').touched)">
+                Por favor, seleccione un tipo de IVA
+            </div>
+
+            <div class="form-group">
+                <strong><label for="iva">Importe IVA</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="facturaForm.get('iva').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="facturaForm.get('iva').invalid && facturaForm.get('iva').touched"></i>
+                <input type="number" class="form-control" id="iva" formControlName="iva" [(ngModel)]="facturaForm.value.iva" disabled>
+            </div>
+            <div class="form-group">
+                <strong><label for="total">Total Factura</label></strong>
+                <i class="fa fa-check-circle check" *ngIf="facturaForm.get('proveedor').valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="facturaForm.get('total').invalid && facturaForm.get('total').touched"></i>
+                <input type="number" class="form-control" id="total" formControlName="total" [(ngModel)]="facturaForm.value.total" disabled>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" [disabled]="!facturaForm.valid">Guardar cambios</button>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-danger" routerLink="/facturas">Cancelar</button>
+            </div>
+
+        </form>
+    </div>
+    <div class="col col-md"></div>
+</div>

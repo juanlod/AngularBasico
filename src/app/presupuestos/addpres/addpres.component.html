@@ -1,0 +1,105 @@
+<div class="row">
+  <div class="col col-md"></div>
+  <div class="col-10 col-md-8">
+    <h2>Añadir nuevo presupuesto</h2>
+    <hr>
+    <a class="btn btn-primary float-md-right" routerLink="/presupuestos">
+      Regresar al listado
+    </a>
+    <br>
+    <form [formGroup]="presupuestoForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <strong><label for="proveedor">Proveedor</label></strong>
+        <i class="fa fa-check-circle check" *ngIf="presupuestoForm.get('proveedor').valid"></i>
+        <i class="fa fa-exclamation-circle uncheck"
+          *ngIf="presupuestoForm.get('proveedor').invalid && presupuestoForm.get('proveedor').touched"></i>
+        <select type="text" class="form-control" id="proveedor" formControlName="proveedor">
+          <option value="">Seleccione...</option>
+          <option *ngFor="let proveedor of proveedores" value="{{proveedor.nombre}}">{{proveedor.nombre}}</option>
+        </select>
+        <div class="error-message"
+          *ngIf=" (presupuestoForm.get('proveedor').invalid && presupuestoForm.get('proveedor').touched)">Por favor,
+          seleccione un proveedor
+        </div>
+
+      </div>
+      <div class="form-group">
+        <strong><label for="fecha">Fecha</label></strong>
+        <i class="fa fa-check-circle check" *ngIf="presupuestoForm.get('fecha').valid"></i>
+        <i class="fa fa-exclamation-circle uncheck"
+          *ngIf="presupuestoForm.get('fecha').invalid && presupuestoForm.get('fecha').touched"></i>
+        <input type="date" class="form-control" id="fecha" formControlName="fecha">
+      </div>
+      <div class="error-message"
+        *ngIf=" (presupuestoForm.get('fecha').invalid && presupuestoForm.get('fecha').touched)">
+        Por favor introduzca una fecha del año actual
+      </div>
+      <div class="form-group">
+        <strong><label for="concepto">Concepto</label></strong>
+        <i class="fa fa-check-circle check" *ngIf="presupuestoForm.get('concepto').valid"></i>
+        <i class="fa fa-exclamation-circle uncheck"
+          *ngIf="presupuestoForm.get('concepto').invalid && presupuestoForm.get('concepto').touched"></i>
+        <input type="text" class="form-control" id="concepto" formControlName="concepto">
+      </div>
+      <div class="error-message"
+        *ngIf=" (presupuestoForm.get('concepto').invalid && presupuestoForm.get('concepto').touched)">
+        El concepto no puede estar vacío
+      </div>
+      <div class="form-group">
+        <strong><label for="base">Base Imponible</label></strong>
+        <i class="fa fa-check-circle check" *ngIf="presupuestoForm.get('base').valid"></i>
+        <i class="fa fa-exclamation-circle uncheck"
+          *ngIf="presupuestoForm.get('base').invalid && presupuestoForm.get('base').touched"></i>
+        <input type="number" class="form-control" id="base" formControlName="base">
+      </div>
+      <div class="error-message" *ngIf=" (presupuestoForm.get('base').invalid && presupuestoForm.get('base').touched)">
+        La cantidad no puede estar vacía
+      </div>
+      <div class="error-message"
+        *ngIf=" (presupuestoForm.get('base').invalid && presupuestoForm.get('base').value <= 0 && presupuestoForm.get('base').touched)">
+        Introduzca un número mayor que 0
+      </div>
+      <div class="form-group">
+        <strong><label for="tipo">Tipo de IVA</label></strong>
+        <i class="fa fa-check-circle check" *ngIf="presupuestoForm.get('tipo').valid"></i>
+        <i class="fa fa-exclamation-circle uncheck"
+          *ngIf="presupuestoForm.get('tipo').invalid && presupuestoForm.get('tipo').touched"></i>
+        <select class="form-control" id=tipo formControlName="tipo">
+          <option value="">Seleccione...</option>
+          <option value=0>0 %</option>
+          <option value=0.04>4 %</option>
+          <option value=0.10>10 %</option>
+          <option value=0.21>21 %</option>
+        </select>
+      </div>
+      <div class="error-message" *ngIf=" (presupuestoForm.get('tipo').invalid && presupuestoForm.get('tipo').touched)">
+        Por favor, seleccione un tipo de IVA
+      </div>
+      <div class="form-group">
+        <strong><label for="iva">Importe IVA</label></strong>
+        <i class="fa fa-check-circle check" *ngIf="presupuestoForm.get('iva').valid"></i>
+        <i class="fa fa-exclamation-circle uncheck"
+          *ngIf="presupuestoForm.get('iva').invalid && presupuestoForm.get('iva').touched"></i>
+        <input type="number" class="form-control" id="iva" formControlName="iva" [(ngModel)]="presupuestoForm.value.iva"
+          disabled>
+      </div>
+      <div class="form-group">
+        <strong><label for="total">Total Presupuesto</label></strong>
+        <i class="fa fa-check-circle check" *ngIf="presupuestoForm.get('proveedor').valid"></i>
+        <i class="fa fa-exclamation-circle uncheck"
+          *ngIf="presupuestoForm.get('total').invalid && presupuestoForm.get('total').touched"></i>
+        <input type="number" class="form-control" id="total" formControlName="total"
+          [(ngModel)]="presupuestoForm.value.total" disabled>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="!presupuestoForm.valid">
+          Añadir Presupuesto
+        </button>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-danger" routerLink="/presupuestos">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  <div class="col col-md"></div>
+</div>

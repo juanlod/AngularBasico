@@ -1,0 +1,19 @@
+<h3>Listado de Contratos</h3>
+<hr>
+<a class="btn btn-primary float-md-right" routerLink="/uploads">Subir nuevo contrato</a>
+<div class="form-inline" style="margin-top: 40px">
+    <label for="numero">Mostrando</label>
+     <select type="search" id="numero" class="form-control" [(ngModel)]="numero" style="margin-left: 1%">
+       <option *ngFor="let numero of numeros" [ngValue]="numero">
+         {{ numero }}
+       </option>
+     </select>
+     <label for="numero" style="margin-left: 1%">entradas</label>
+   </div>
+<div class="row">
+  <div *ngFor='let upload of uploads | paginate: {itemsPerPage: numero, currentPage: pageActual}' style="padding: 10px">
+    <app-detalles [upload]="upload"></app-detalles>
+  </div>
+</div>
+<br>
+<pagination-controls (pageChange)="pageActual = $event" (change)="numero = $event"></pagination-controls>
