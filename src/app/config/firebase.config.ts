@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyD8bdRTmmoCuVVBUYvN3yPUVIJOVSiJ6Jk",
+    apiKey: "",
     authDomain: "comprasapp-b36b0.firebaseapp.com",
     databaseURL: "https://comprasapp-b36b0.firebaseio.com",
     projectId: "comprasapp-b36b0",
