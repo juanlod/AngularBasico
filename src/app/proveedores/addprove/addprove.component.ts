@@ -40,9 +40,9 @@ export class AddproveComponent implements OnInit {
 
   ngOnInit() {
     this.proveedorForm = this.pform.group({
-      nombre: ['', [Validators.required, Validators.nullValidator, Validators.minLength(3), Validators.maxLength(200),
+      nombre: ['', [Validators.required, Validators.nullValidator, Validators.minLength(3), Validators.maxLength(200)]],
+      cif:  ['', [Validators.required, Validators.nullValidator, Validators.minLength(9), Validators.maxLength(30),
          Validators.pattern (/^([ABCDngMNPQRSUVW, abcdefghjklmnpqrsuvw])(\d{7})([0-9A-J])$/)]],
-      cif:  ['', [Validators.required, Validators.nullValidator, Validators.minLength(9), Validators.maxLength(30)]],
       direccion: ['', [Validators.required, Validators.nullValidator, Validators.minLength(5), Validators.maxLength(200)]],
       cp: ['', [Validators.required, Validators.nullValidator, Validators.minLength(5), Validators.maxLength(70),
         Validators.pattern(/([0-9])(\d{4})$/)]],

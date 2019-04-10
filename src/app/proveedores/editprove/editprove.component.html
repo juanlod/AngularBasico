@@ -13,9 +13,8 @@
         <i class="fa fa-check-circle check" *ngIf="proveedorForm.get('nombre').valid"></i>
         <i class="fa fa-exclamation-circle uncheck"
           *ngIf="proveedorForm.get('nombre').invalid && proveedorForm.get('nombre').touched"></i>
-        <input type="text" class="form-control" id="nombre" formControlName="nombre" [value]='proveedorForm.value.nombre'>
-        <div class="error-message"
-          *ngIf=" (proveedorForm.get('nombre').invalid && proveedorForm.get('nombre').touched)">
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" [(ngModel)]='proveedor.nombre'>
+        <div class="error-message" *ngIf="(proveedorForm.get('nombre').invalid && proveedorForm.get('nombre').touched)">
           El nombre no puede estar vacío</div>
       </div>
       <div class="form-group">
@@ -23,7 +22,7 @@
         <i class="fa fa-check-circle check" *ngIf="proveedorForm.get('cif').valid"></i>
         <i class="fa fa-exclamation-circle uncheck"
           *ngIf="proveedorForm.get('cif').invalid && proveedorForm.get('cif').touched"></i>
-        <input type="text" class="form-control" id="cif" formControlName="cif" [value]='proveedorForm.value.cif'>
+        <input type="text" class="form-control" id="cif" formControlName="cif" [(ngModel)]='proveedor.cif'>
         <div class="error-message" *ngIf=" (proveedorForm.get('cif').invalid && proveedorForm.get('cif').touched)">El
           número CIF no puede estar vacío</div>
       </div>
