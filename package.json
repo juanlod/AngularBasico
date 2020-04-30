@@ -27,7 +27,7 @@
     "datatables": "^1.10.18",
     "datatables.net": "^1.10.16",
     "firebase": "^5.7.2",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "ngx-pagination": "^3.2.1",
     "rxjs": "^6.4.0",
     "rxjs-compat": "^6.4.0",
